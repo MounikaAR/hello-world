@@ -7,13 +7,14 @@ pipeline {
     stage('Checkout Source') {
       steps {
         git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
+        //git branch: 'master', credentialsId: 'gitbubnewcrd', url: 'https://github.com/MounikaAR/hello-world.git'
       }
     }
     
       stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("vamsijakkula/hellowhale:${env.BUILD_ID}")
+                    myapp = docker.build("sivisoft/hellowhale:${env.BUILD_ID}")
                 }
             }
         }
@@ -33,7 +34,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
+          kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "kubeconfig")
         }
       }
     }
