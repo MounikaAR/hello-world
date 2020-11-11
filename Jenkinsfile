@@ -11,7 +11,7 @@ pipeline {
         
         script {
           container('docker') {
-            docker ps
+             sh 'docker ps'
             //git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
           }
         }
