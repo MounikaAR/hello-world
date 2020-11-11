@@ -33,9 +33,11 @@ pipeline {
       stage("Push image") {
             steps {
                 script {
+                    container('docker') {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
+                    }
                     }
                 }
             }
@@ -45,7 +47,9 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
+            container('docker') {
           kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "kubeconfig")
+            }
         }
       }
     }
