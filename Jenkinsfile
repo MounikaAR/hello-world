@@ -1,7 +1,7 @@
 pipeline {
 
     agent {
-    kubernetes(k8sagent(name: 'docker')) <- Jenkins Agent provisioned
+    kubernetes(k8sagent(name: 'docker'))
   }
 
   stages {
