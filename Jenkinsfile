@@ -1,7 +1,7 @@
 pipeline {
 
     agent {
-    kubernetes(k8sagent(name: 'docker'))
+    kubernetes(k8sagent(name: 'dind'))
   }
 
   stages {
@@ -10,7 +10,8 @@ pipeline {
       steps {
         
         script {
-          container('docker') {
+          container('dind') {
+            docker ps
             git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
           }
         }
