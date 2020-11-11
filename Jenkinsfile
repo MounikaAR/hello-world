@@ -1,12 +1,20 @@
 pipeline {
 
-  agent any
+    agent {
+    kubernetes(k8sagent(name: 'docker')) <- Jenkins Agent provisioned
+  }
 
   stages {
 
     stage('Checkout Source') {
       steps {
-        git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
+        
+        script {
+          container('docker') {
+            git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
+          }
+        }
+        
         //git branch: 'master', credentialsId: 'gitbubnewcrd', url: 'https://github.com/MounikaAR/hello-world.git'
       }
     }
