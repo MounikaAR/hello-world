@@ -10,9 +10,9 @@ pipeline {
       steps {
         
         script {
-          container('dind') {
+          container('docker') {
             docker ps
-            git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
+            //git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
           }
         }
         
@@ -23,7 +23,9 @@ pipeline {
       stage("Build image") {
             steps {
                 script {
+                    container('docker') {
                     myapp = docker.build("sivisoft/hellowhale:${env.BUILD_ID}")
+                    }
                 }
             }
         }
