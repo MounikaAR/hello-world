@@ -47,7 +47,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-            container('docker') {
+            container('kubectl') {
           kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "kubeconfig")
             }
         }
