@@ -1,7 +1,7 @@
 pipeline {
 
     agent {
-    kubernetes(k8sagent(name: 'dind'))
+    kubernetes(k8sagent(name: 'mini+dind'))
   }
 
   stages {
