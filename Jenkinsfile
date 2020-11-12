@@ -37,7 +37,7 @@ options
             {
                 script 
                 {
-                    container('docker') {
+                    container('git') {
                     // calculate GIT lastest commit short-hash
                     gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                     shortCommitHash = gitCommitHash.take(7)
