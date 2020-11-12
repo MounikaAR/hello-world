@@ -45,7 +45,7 @@ options
       stage("Push image") {
             steps {
                 script {
-                    container('docker') {
+                    container('awscli') {
                         
                          // login to ECR - for now it seems that that the ECR Jenkins plugin is not performing the login as expected. I hope it will in the future.
                     sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
