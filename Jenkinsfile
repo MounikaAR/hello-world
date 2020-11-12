@@ -14,7 +14,7 @@ options
         IMAGE = 'hello-world:latest'
         ECRURL = 'http://184881316864.dkr.ecr.us-east-1.amazonaws.com'
         REGURL = '184881316864.dkr.ecr.us-east-1.amazonaws.com'
-        ECRCRED = 'ecr:us-east-1:docker_ecr_crd'
+        ECRCRED = 'ecr:us-east-1:docker-ecr-crd'
     }
   stages {
 
@@ -65,9 +65,8 @@ options
                       sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 184881316864.dkr.ecr.us-east-1.amazonaws.com"
                     // Push the Docker image to ECR
                       //sh "docker tag hello-world:latest 796556984717.dkr.ecr.us-east-1.amazonaws.com/hello-world:${env.BUILD_ID}"
-                   // docker.withRegistry(ECRURL, ECRCRED)
-                   // {
-                    docker.withRegistry('ECRURL', '') {
+                    docker.withRegistry(ECRURL, ECRCRED) {
+                    //docker.withRegistry('ECRURL', '') {
                             dockerapp.push("latest")
                             dockerapp.push("${env.BUILD_ID}")
                             //dockerapp.image(IMAGE).push()
