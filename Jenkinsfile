@@ -37,8 +37,7 @@ options
             {
                 script 
                 {
-                    container('docker') {
-                    sh "apt-get update -y && apt-get install git -y"
+                    container('alpine/git') {
                     // calculate GIT lastest commit short-hash
                     gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                     shortCommitHash = gitCommitHash.take(7)
