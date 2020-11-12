@@ -35,7 +35,7 @@ options
       stage("Build image") {
             steps {
                 script {
-                    container('docker') {
+                    container('bearengineer/awscli-kubectl') {
                         dockerapp = docker.build("${IMAGE}")
                     }
                 }
