@@ -37,7 +37,7 @@ options
             steps {
                 script {
                     container('docker') {
-                        dockerapp = docker.build("${REGURL}/${IMAGE}")
+                        dockerapp = docker.build("${IMAGE}")
                     }
                 }
             }
@@ -67,11 +67,11 @@ options
                       //sh "docker tag hello-world:latest 796556984717.dkr.ecr.us-east-1.amazonaws.com/hello-world:${env.BUILD_ID}"
                    // docker.withRegistry(ECRURL, ECRCRED)
                    // {
-                    //docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    docker.withRegistry('ECRURL', '') {
                             dockerapp.push("latest")
                             dockerapp.push("${env.BUILD_ID}")
                             //dockerapp.image(IMAGE).push()
-                    //}
+                    }
                     }
                 }
             }
