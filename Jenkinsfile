@@ -54,13 +54,13 @@ options
                    // sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
                       sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 184881316864.dkr.ecr.us-east-1.amazonaws.com"
                     // Push the Docker image to ECR
-                    docker.withRegistry(ECRURL, ECRCRED)
-                    {
+                   // docker.withRegistry(ECRURL, ECRCRED)
+                   // {
                     //docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                             dockerapp.push("latest")
                             dockerapp.push("${env.BUILD_ID}")
                             //dockerapp.image(IMAGE).push()
-                    }
+                    //}
                     }
                 }
             }
