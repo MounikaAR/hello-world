@@ -1,7 +1,7 @@
 pipeline {
 
     agent {
-    kubernetes(k8sagent(name: 'mini+dind'))
+    kubernetes(k8sagent(name: 'mini+k8s'))
   }
 options
     {
@@ -45,7 +45,7 @@ options
       stage("Push image") {
             steps {
                 script {
-                    container('docker') {
+                    container('k8s') {
                     sh "pip install awscli ;aws --version"
                     sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
                          // login to ECR - for now it seems that that the ECR Jenkins plugin is not performing the login as expected. I hope it will in the future.
@@ -67,7 +67,7 @@ options
     stage('Deploy App') {
       steps {
         script {
-            container('kubectl') {
+            container('k8s') {
           kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "kubeconfig")
             }
         }
