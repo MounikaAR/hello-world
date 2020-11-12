@@ -1,7 +1,7 @@
 pipeline {
 
     agent {
-    kubernetes(k8sagent(name: 'mini+k8s'))
+    kubernetes(k8sagent(name: 'mini+dind+k8s'))
   }
 options
     {
