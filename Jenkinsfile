@@ -13,7 +13,7 @@ options
         PROJECT = 'hello-world'
         IMAGE = 'hello-world:latest'
         ECRURL = 'http://184881316864.dkr.ecr.us-east-1.amazonaws.com'
-        ECRCRED = 'ecr:eu-central-1:docker_ecr'
+        ECRCRED = 'ecr:us-east-1:docker_ecr'
     }
   stages {
 
