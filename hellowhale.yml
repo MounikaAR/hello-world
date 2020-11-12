@@ -1,31 +1,17 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello-kubernetes
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-    targetPort: 8080
-  selector:
-    app: hello-kubernetes
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: hello-kubernetes
+  name: rss-site
+  labels:
+    app: web
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: hello-kubernetes
-  template:
-    metadata:
-      labels:
-        app: hello-kubernetes
-    spec:
-      containers:
-      - name: hello-kubernetes
-        image: paulbouwer/hello-kubernetes:1.8
-        ports:
-        - containerPort: 8080
+  containers:
+    - name: front-end
+      image: nginx
+      ports:
+        - containerPort: 80
+    - name: rss-reader
+      image: nickchase/rss-php-nginx:v1
+      ports:
+        - containerPort: 88
