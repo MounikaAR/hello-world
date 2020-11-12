@@ -13,6 +13,7 @@ options
         PROJECT = 'hello-world'
         IMAGE = 'hello-world:latest'
         ECRURL = 'http://184881316864.dkr.ecr.us-east-1.amazonaws.com'
+        REGURL = '184881316864.dkr.ecr.us-east-1.amazonaws.com'
         ECRCRED = 'ecr:us-east-1:docker_ecr_crd'
     }
   stages {
@@ -36,7 +37,7 @@ options
             steps {
                 script {
                     container('docker') {
-                        dockerapp = docker.build("${IMAGE}")
+                        dockerapp = docker.build("${REGURL}/${IMAGE}")
                     }
                 }
             }
@@ -45,15 +46,25 @@ options
       stage("Push image") {
             steps {
                 script {
-                    container('k8s') {
+                    container('docker') {
                    // sh "pip install awscli ;aws --version"
+                   sh """
+                         apk add --no-cache \
+                            python3 \
+                            py3-pip \
+                        && pip3 install --upgrade pip \
+                        && pip3 install \
+                            awscli \
+                        && rm -rf /var/cache/apk/*
+                      """
                         
-                   sh "apk add --update docker openrc"
-                   sh "rc-update add docker boot"
+                   //sh "apk add --update docker openrc"
+                   //sh "rc-update add docker boot"
                                             // login to ECR - for now it seems that that the ECR Jenkins plugin is not performing the login as expected. I hope it will in the future.
                    // sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
                       sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 184881316864.dkr.ecr.us-east-1.amazonaws.com"
                     // Push the Docker image to ECR
+                      //sh "docker tag hello-world:latest 796556984717.dkr.ecr.us-east-1.amazonaws.com/hello-world:${env.BUILD_ID}"
                    // docker.withRegistry(ECRURL, ECRCRED)
                    // {
                     //docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
