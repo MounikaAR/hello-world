@@ -47,6 +47,9 @@ options
                 script {
                     container('k8s') {
                    // sh "pip install awscli ;aws --version"
+                        
+                   sh "apk add --update docker openrc"
+                   sh "rc-update add docker boot"
                                             // login to ECR - for now it seems that that the ECR Jenkins plugin is not performing the login as expected. I hope it will in the future.
                    // sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
                       sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 184881316864.dkr.ecr.us-east-1.amazonaws.com"
