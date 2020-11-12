@@ -81,7 +81,7 @@ options
       steps {
         script {
             container('k8s') {
-          kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "kubeconfig")
+          kubernetesDeploy(configs: "hello-world.yml", kubeconfigId: "kubeconfig")
             }
         }
       }
