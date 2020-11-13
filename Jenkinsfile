@@ -82,8 +82,8 @@ options
         script {
             container('k8s') {
           withCredentials([kubeconfigFile(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-              sh 'use $KUBECONFIG' // environment variable; not pipeline variable
-              sh 'kubectl get nodes'
+              sh "kubectl get nodes --kubeconfig=$KUBECONFIG" // environment variable; not pipeline variable
+              
             }
          // kubernetesDeploy(configs: "hello-world.yml", kubeconfigId: "kubeconfig")
            kubernetesDeploy kubeconfigId: 'kubeconfig', configs: 'hello-world.yml', enableConfigSubstitution: true  // REPLACE kubeconfigId
