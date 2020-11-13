@@ -86,7 +86,7 @@ options
               sh 'kubectl get nodes'
             }
          // kubernetesDeploy(configs: "hello-world.yml", kubeconfigId: "kubeconfig")
-           kubernetesDeploy kubeconfigId: 'kubeconfig', configs: 'hello-world.yaml', enableConfigSubstitution: true  // REPLACE kubeconfigId
+           kubernetesDeploy kubeconfigId: 'kubeconfig', configs: 'hello-world.yml', enableConfigSubstitution: true  // REPLACE kubeconfigId
             }
         }
       }
