@@ -18,20 +18,7 @@ options
     }
   stages {
 
-    stage('Checkout Source') {
-      steps {
-        
-        script {
-          container('docker') {
-             sh 'docker ps'
-            //git url:'https://github.com/vamsijakkula/hellowhale.git', branch:'master'
-          }
-        }
-        
-        //git branch: 'master', credentialsId: 'gitbubnewcrd', url: 'https://github.com/MounikaAR/hello-world.git'
-      }
-    }
-      
+    
          
       stage("Build image") {
             steps {
